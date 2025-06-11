@@ -46,7 +46,7 @@ class LibraryService {
             'isDownloaded': episode.isDownloaded,
             'isWatched': episode.isWatched,
             'downloadPath': episode.downloadPath,
-            'addedAt': episode.addedAt.toIso8601String(),
+            'addedAt': (episode.addedAt ?? DateTime.now()).toIso8601String(),
           }).toList(),
         }).toList(),
       };
