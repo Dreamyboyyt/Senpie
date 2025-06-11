@@ -24,13 +24,16 @@ plugins {
 
 include ":app"
 
-// This is the modern and correct way to declare repositories for dependencies.
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    // --- THIS IS THE CRUCIAL FIX ---
+    // This tells Gradle to allow plugins to declare their own repositories,
+    // which resolves the conflict with the Flutter plugin.
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS) 
+    // -----------------------------
+
     repositories {
         google()
         mavenCentral()
-        // Add JitPack repository for ffmpeg-kit and other community packages
         maven { url 'https://www.jitpack.io' }
     }
 }
