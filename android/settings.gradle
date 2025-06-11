@@ -25,15 +25,18 @@ plugins {
 include ":app"
 
 dependencyResolutionManagement {
-    // --- THIS IS THE CRUCIAL FIX ---
-    // This tells Gradle to allow plugins to declare their own repositories,
-    // which resolves the conflict with the Flutter plugin.
-    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS) 
-    // -----------------------------
-
+    // This mode allows plugins to add their own repositories, which is good.
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    
     repositories {
         google()
         mavenCentral()
         maven { url 'https://www.jitpack.io' }
+        // --- THIS IS THE CRITICAL FIX ---
+        // Explicitly add the Flutter engine's repository.
+        maven {
+            url 'https://storage.googleapis.com/download.flutter.io'
+        }
+        // ---------------------------------
     }
 }
