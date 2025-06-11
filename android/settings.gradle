@@ -24,19 +24,17 @@ plugins {
 
 include ":app"
 
+// This block is the single source of truth for all dependency repositories.
 dependencyResolutionManagement {
-    // This mode allows plugins to add their own repositories, which is good.
-    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
-    
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://www.jitpack.io' }
-        // --- THIS IS THE CRITICAL FIX ---
-        // Explicitly add the Flutter engine's repository.
+        // This is for ffmpeg-kit
+        maven { url 'https://www.jitpack.io' } 
+        // This is for the core Flutter engine libraries
         maven {
             url 'https://storage.googleapis.com/download.flutter.io'
         }
-        // ---------------------------------
     }
 }
