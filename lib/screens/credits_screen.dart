@@ -127,7 +127,7 @@ class CreditsScreen extends StatelessWidget {
                       context,
                       'Framework',
                       'Flutter',
-                      MdiIcons.flutterDash,
+                      MdiIcons.flutter,
                     ),
                     const SizedBox(height: 12),
                     _buildInfoRow(
