@@ -23,3 +23,14 @@ plugins {
 }
 
 include ":app"
+
+// This is the modern and correct way to declare repositories for dependencies.
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        // Add JitPack repository for ffmpeg-kit and other community packages
+        maven { url 'https://www.jitpack.io' }
+    }
+}
