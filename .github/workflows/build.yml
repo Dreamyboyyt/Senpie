@@ -1,0 +1,64 @@
+# This workflow is triggered on pushes to the main branch and on pull requests.
+name: Build and Release APK
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build_android:
+    name: Build Release APK
+    # We use ubuntu-latest as it's the standard for GitHub-hosted runners
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checks out your repository's code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Sets up the Java environment required for Gradle
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17' # Required for modern Android builds
+
+      # 3. Sets up the Flutter SDK
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          # Use the Flutter version your project is built with
+          flutter-version: '3.24.5' 
+          channel: 'stable'
+          cache: true # Caches Flutter dependencies for faster builds
+
+      # 4. Installs all the Dart/Flutter packages from pubspec.yaml
+      - name: Install Flutter dependencies
+        run: flutter pub get
+
+      # 5. Runs the code generator to create .g.dart files
+      #    This is crucial and must be done before the build step.
+      - name: Generate files
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
+      # 6. Cleans up any previous build artifacts
+      - name: Clean previous build
+        run: flutter clean
+
+      # 7. Builds the release APKs, split by architecture for smaller sizes
+      - name: Build release APKs
+        run: flutter build apk --release --split-per-abi
+
+      # 8. Uploads the generated APKs as an artifact
+      #    This step makes the APKs downloadable from the GitHub Actions summary page.
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          # Name of the artifact. We make it dynamic with the Git commit SHA for uniqueness.
+          name: senpie-apks-${{ github.sha }}
+          # Path to the files to upload. This wildcard pattern finds all release APKs.
+          path: build/app/outputs/flutter-apk/*.apk
+          # How long to keep the artifact. 90 days is the default for repositories.
+          retention-days: 7
