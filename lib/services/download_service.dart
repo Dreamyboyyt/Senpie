@@ -1,12 +1,10 @@
 import 'dart:async';
 import 'dart:convert'; // <<< ADD THIS IMPORT
 import 'dart:io';
-import 'package:dio/dio.dart';
 import 'package:flutter_downloader/flutter_downloader.dart' as fd; // Use prefix
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:permission_handler/permission_handler.dart';
-import '../models/anime_metadata.dart';
 import '../models/download_task.dart';
 import '../utils/constants.dart';
 import 'anime_tracking_service.dart';

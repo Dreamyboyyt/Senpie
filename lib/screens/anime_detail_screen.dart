@@ -296,7 +296,7 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
                   color: AppTheme.primaryCyan.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Text(
+                child: const Text(
                   'Downloaded',
                   style: TextStyle(
                     color: AppTheme.primaryCyan,
@@ -313,7 +313,7 @@ class _AnimeDetailScreenState extends State<AnimeDetailScreen> {
                   color: AppTheme.primaryPink.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Text(
+                child: const Text(
                   'Watched',
                   style: TextStyle(
                     color: AppTheme.primaryPink,

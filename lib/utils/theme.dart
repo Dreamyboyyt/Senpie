@@ -14,7 +14,7 @@ class AppTheme {
   static const Color textDark = Color(0xFFF1F5F9);
   static const Color textSecondaryDark = Color(0xFF94A3B8);
 
-  static final LinearGradient primaryGradient = LinearGradient(
+  static const LinearGradient primaryGradient = LinearGradient(
     colors: [primaryCyan, primaryPurple, primaryPink],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -58,7 +58,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(16),
         ),
       ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: surfaceLight,
         selectedItemColor: primaryPurple,
         unselectedItemColor: textSecondary,
@@ -152,7 +152,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(16),
         ),
       ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: surfaceDark,
         selectedItemColor: primaryPurple,
         unselectedItemColor: textSecondaryDark,
